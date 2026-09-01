@@ -75,7 +75,7 @@ class FireBasePushNotification {
     );
 
     flutterLocalNotificationsPlugin.initialize(
-      initializationSettings,
+      settings: initializationSettings,
       onDidReceiveNotificationResponse: (payload) async {
         dynamic body = jsonDecode(payload.payload!);
         log("Payload body: $body");
@@ -151,10 +151,10 @@ class FireBasePushNotification {
 
     try {
       await flutterLocalNotificationsPlugin.show(
-        0,
-        message.title,
-        message.body,
-        platformChannelSpecifics,
+        id: 0,
+        title: message.title,
+        body: message.body,
+        notificationDetails: platformChannelSpecifics,
         payload: json.encode(data),
       );
       debugPrint('Notification shown with title: ${message.title}, body: ${message.body}');
